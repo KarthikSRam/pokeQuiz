@@ -1,0 +1,22 @@
+#navspan{
+  display: flex;
+  flex-direction: row;
+}
+
+#navspan span{
+  width: 50%;
+}
+
+#loginspan{
+  text-align: right;
+}
+
+#signupspan{
+  text-align: right;
+}
+
+.navbar .card-panel{
+  /* top:0; */
+  margin-top: 0;
+  margin-bottom: 0;
+}

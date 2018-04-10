@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title>PokeQuiz Time</title>
+    <% include ../views/partials/head %>
   </head>
   <body>
-    Welcome to my quiz
+    <%- include('./partials/nav', {user: user}); %>
+    <div class="welcomeText">
+      <p>Ready to play pokeQuiz?</p>
+    </div>
   </body>
 </html>

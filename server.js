@@ -45,7 +45,12 @@ app.use(function(req, res, next) {
 //ROUTES
 
 app.get('/', function(req, res) {
- res.render("index");
+ res.render("index", {user: req.user});
+});
+
+// show login view
+app.get('/login', function (req, res) {
+ res.render('login', {user: req.user});
 });
 
 //Start the server
