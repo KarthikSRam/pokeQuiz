@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var QuestionSchema = new Schema({
   question: String,
+  image: String,
   options: [String],
   correct: Number
 })
