@@ -20,3 +20,29 @@
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.welcomeText{
+  text-align: center;
+}
+
+div img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.homepageButtons{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.readyButton{
+  margin-top: 2em;
+  margin-right: 1em;
+}
+
+.notReadyButton{
+  margin-top: 2em;
+  margin-left: 1em;
+}

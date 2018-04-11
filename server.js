@@ -3,6 +3,7 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     db = require("./models"),
     User = db.User,
+    Question = db.Question,
 
     //  NEW ADDITIONS
     cookieParser = require('cookie-parser'),
@@ -26,12 +27,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  },
-  User.authenticate()
-));
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -49,9 +45,61 @@ app.get('/', function(req, res) {
 });
 
 // show login view
-app.get('/login', function (req, res) {
+app.get('/login', function(req, res) {
  res.render('login', {user: req.user});
 });
+
+app.get('/signup', function(req, res) {
+  res.render('login', {user: req.user});
+});
+
+app.post('/login', passport.authenticate('local'), function(req, res) {
+  console.log(req.user);
+  res.render('index', {user: req.user});
+});
+
+// sign up new user, then log them in
+// hashes and salts password, saves new user to db
+app.post('/signup', function(req, res) {
+  User.register(new User({ username: req.body.username, location: req.body.location }), req.body.password,
+    function (err, newUser) {
+      if (err){
+        console.log(err)
+      } else {
+        passport.authenticate('local')(req, res, function() {
+          res.render('index', {user: newUser});
+        })
+    }
+
+  });
+});
+
+app.get('/logout', function(req, res) {
+  console.log("BEFORE logout", JSON.stringify(req.user));
+  req.logout();
+  console.log("AFTER logout", JSON.stringify(req.user));
+  res.redirect('/');
+});
+
+//A developer route to add new question to the database
+app.get('/createQuestion', function(req, res) {
+  res.render('questionForm', {user: req.user});
+})
+
+//Route that creates the question
+app.post('/questions', function(req, res) {
+  var newQues = new db.Question({
+    question: req.body.question,
+    image: req.body.image,
+    options: [req.body.option1, req.body.option2, req.body.option3, req.body.option4],
+    correct: req.body.correct
+  });
+
+  newQues.save(function(err, savedQuestion) {
+    if(err) { return console.log(err) }
+    console.log("saved new question: ", savedQuestion);
+  })
+})
 
 //Start the server
 app.listen(process.env.PORT || 3000, function () {

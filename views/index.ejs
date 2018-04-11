@@ -5,8 +5,13 @@
   </head>
   <body>
     <%- include('./partials/nav', {user: user}); %>
-    <div class="welcomeText">
-      <p>Ready to play pokeQuiz?</p>
+    <div class="tyrant">
+      <h2 class="welcomeText">Ready to play pokeQuiz?</h2>
+      <img src="/images/Tyranitar.png" alt="Tyranitar">
+      <div class="homepageButtons">
+        <a class="waves-effect waves-light btn readyButton" href="/quiz">I was born ready</a>
+        <a class="waves-effect waves-light btn notReadyButton" href="https://bulbapedia.bulbagarden.net">Wait! I'm not ready!</a>
+      </div>
     </div>
   </body>
 </html>
