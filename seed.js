@@ -38,7 +38,34 @@ var questionsList = [
     ],
     correct: 3,
     questionNum: 3
+  },
+
+  {
+    question: "What does this Pokemon evolve into?",
+    image: "/images/Charmeleon.png",
+    options: [
+      "Venasaur",
+      "Charizard",
+      "Emboar",
+      "Charmander"
+    ],
+    correct: 1,
+    questionNum: 4
+  },
+
+  {
+    question: "An easy one: Name this Pokemon",
+    image: "/images/Pikachu.png",
+    options: [
+      "Raichu",
+      "Jigglypuff",
+      "Pikachu",
+      "None of these"
+    ],
+    correct: 2,
+    questionNum: 5
   }
+
 ]
 
 db.Question.remove({}, function(err, questions) {

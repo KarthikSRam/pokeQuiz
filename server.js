@@ -121,6 +121,9 @@ app.get('/quiz/:qnum', function(req, res) {
     if(err){
       return console.log("Error finding question")
     }
+    db.Question.count({}, function(err, count) {
+      totalQuestions = count;
+    })
     res.render('quiz', {user: req.user, question: foundQuestion, totalQuestions: totalQuestions})
   });
 })
