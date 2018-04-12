@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <% include ../views/partials/head %>
+  </head>
+  <body>
+    <%- include('./partials/nav', {user: user}); %>
+    <div class="resultsDiv">
+      <h2>Results</h2>
+      <h3><%= user.username%></h3>
+      <h3>Correct answers: <%= score %> out of 3</h3>
+    </div>
+  </body>
+</html>

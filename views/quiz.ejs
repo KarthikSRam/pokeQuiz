@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <% include ../views/partials/head %>
+  </head>
+  <body>
+    <%- include('./partials/nav', {user: user}); %>
+    <div class="questionDiv">
+      <h3 class="questionText"><%= question.question  %></h3>
+      <img src="<%= question.image %>" alt="image missing">
+    </div>
+
+      <form id="optionsForm" action="#">
+
+        <p>
+          <label>
+            <input class="with-gap" name="answer" type="radio" value="0" checked id="option0"/>
+            <label for="option0">
+              <% if(question.options[0].includes("/")){ %>
+                <img class="optionImage" src="<%= question.options[0] %>" alt="option0">
+              <% } else { %>
+                <span> <%= question.options[0] %> </span>
+              <% } %>
+            </label>
+          </label>
+        </p>
+
+        <p>
+          <label>
+            <input class="with-gap" name="answer" type="radio" value="1" id="option1"/>
+            <label for="option1">
+            <span>
+              <% if(question.options[1].includes("/")){ %>
+                <img class="optionImage" src="<%= question.options[1] %>" alt="option1">
+              <% } else { %>
+                <%= question.options[1] %>
+              <% } %>
+            </span>
+            </label>
+          </label>
+        </p>
+
+        <p>
+          <label>
+            <input class="with-gap" name="answer" type="radio" value="2" id="option2"/>
+            <label for="option2">
+            <span>
+              <% if(question.options[2].includes("/")){ %>
+                <img class="optionImage" src="<%= question.options[2] %>" alt="option2">
+              <% } else { %>
+                <%= question.options[2] %>
+              <% } %>
+            </span>
+            </label>
+          </label>
+        </p>
+
+        <p>
+          <label>
+            <input class="with-gap" name="answer" type="radio" value="3" id="option3"/>
+            <label for="option3">
+            <span>
+              <% if(question.options[3].includes("/")){ %>
+                <img class="optionImage" src="<%= question.options[3] %>" alt="option3">
+              <% } else { %>
+                <%= question.options[3] %>
+              <% } %>
+            </span>
+            </label>
+          </label>
+        </p>
+        <input name="correctAns" type="hidden" value="<%= question.correct %>"/>
+        <input name="questionNum" type="hidden" value="<%= question.questionNum %>"/>
+        <div class="form-group">
+          <input type="submit" class="btn btn-block btn-primary" value="Submit">
+        </div>
+      </form>
+  </body>
+</html>

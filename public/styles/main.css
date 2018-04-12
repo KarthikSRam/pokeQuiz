@@ -25,6 +25,32 @@
   text-align: center;
 }
 
+.optionImage{
+  /* display: block; */
+  max-width:300px;
+  max-height:200px;
+  width: auto;
+  height: auto;
+}
+
+#optionsForm{
+  /* display: inline-block;
+  text-align: center; */
+  margin-left:auto;
+  margin-right:auto;
+  width:300px;
+}
+
+#optionsForm div{
+  align-items: center;
+}
+
+/* .optionsFormDiv{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+} */
+
 div img{
   display: block;
   margin-left: auto;
@@ -45,4 +71,8 @@ div img{
 .notReadyButton{
   margin-top: 2em;
   margin-left: 1em;
+}
+
+.resultsDiv{
+  text-align: center;
 }

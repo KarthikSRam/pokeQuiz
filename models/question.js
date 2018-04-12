@@ -5,7 +5,8 @@ var QuestionSchema = new Schema({
   question: String,
   image: String,
   options: [String],
-  correct: Number
+  correct: Number,
+  questionNum: Number
 })
 
 var Question = mongoose.model('Question', QuestionSchema);

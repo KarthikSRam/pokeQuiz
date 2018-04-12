@@ -11,7 +11,8 @@ var express = require("express"),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
-
+var score = 0;
+var scoreViewed = false;
 app.set("views", __dirname + '/views');    // Views directory
 app.use(express.static('public'));          // Static directory
 app.use(bodyParser.urlencoded({ extended: true })); // req.body
@@ -41,6 +42,9 @@ app.use(function(req, res, next) {
 //ROUTES
 
 app.get('/', function(req, res) {
+ if(scoreViewed){
+   score = 0;
+ }
  res.render("index", {user: req.user});
 });
 
@@ -74,7 +78,12 @@ app.post('/signup', function(req, res) {
   });
 });
 
+app.post('/quizScore', function(req, res) {
+  score++;
+})
+
 app.get('/logout', function(req, res) {
+  score=0;
   console.log("BEFORE logout", JSON.stringify(req.user));
   req.logout();
   console.log("AFTER logout", JSON.stringify(req.user));
@@ -92,15 +101,30 @@ app.post('/questions', function(req, res) {
     question: req.body.question,
     image: req.body.image,
     options: [req.body.option1, req.body.option2, req.body.option3, req.body.option4],
-    correct: req.body.correct
+    correct: req.body.correct,
+    questionNum: req.body.questionNum
   });
 
   newQues.save(function(err, savedQuestion) {
     if(err) { return console.log(err) }
     console.log("saved new question: ", savedQuestion);
   })
+  res.render('index', {user: req.user});
 })
 
+app.get('/quiz/:qnum', function(req, res) {
+  db.Question.findOne({questionNum: req.params.qnum}, function(err, foundQuestion) {
+    if(err){
+      return console.log("Error finding question")
+    }
+    res.render('quiz', {user: req.user, question: foundQuestion})
+  });
+})
+
+app.get('/results', function(req, res) {
+  scoreViewed = true;
+  res.render('results', {user: req.user, score: score});
+})
 //Start the server
 app.listen(process.env.PORT || 3000, function () {
   console.log('Example app listening at http://localhost:3000/');
