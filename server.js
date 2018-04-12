@@ -13,6 +13,7 @@ var express = require("express"),
 
 var score = 0;
 var scoreViewed = false;
+var totalQuestions = 3;
 app.set("views", __dirname + '/views');    // Views directory
 app.use(express.static('public'));          // Static directory
 app.use(bodyParser.urlencoded({ extended: true })); // req.body
@@ -117,7 +118,7 @@ app.get('/quiz/:qnum', function(req, res) {
     if(err){
       return console.log("Error finding question")
     }
-    res.render('quiz', {user: req.user, question: foundQuestion})
+    res.render('quiz', {user: req.user, question: foundQuestion, totalQuestions: totalQuestions})
   });
 })
 

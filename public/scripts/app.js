@@ -29,9 +29,10 @@ $(document).ready(function(){
         }
      }
      console.log(score);
+     totalQuestions = parseInt(formData[3].value)
      qNum = parseInt(formData[2].value)
      nextQNum = qNum + 1;
-     if(nextQNum >= 4){
+     if(nextQNum > totalQuestions){
        window.location.replace("/results");
      }
      else{
