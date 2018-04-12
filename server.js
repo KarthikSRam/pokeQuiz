@@ -13,7 +13,10 @@ var express = require("express"),
 
 var score = 0;
 var scoreViewed = false;
-var totalQuestions = 3;
+var totalQuestions = 0;
+db.Question.count({}, function(err, count) {
+  totalQuestions = count;
+})
 app.set("views", __dirname + '/views');    // Views directory
 app.use(express.static('public'));          // Static directory
 app.use(bodyParser.urlencoded({ extended: true })); // req.body
@@ -66,7 +69,7 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 // sign up new user, then log them in
 // hashes and salts password, saves new user to db
 app.post('/signup', function(req, res) {
-  User.register(new User({ username: req.body.username, location: req.body.location }), req.body.password,
+  User.register(new User({ username: req.body.username, location: req.body.location, scores: [] }), req.body.password,
     function (err, newUser) {
       if (err){
         console.log(err)
@@ -124,6 +127,16 @@ app.get('/quiz/:qnum', function(req, res) {
 
 app.get('/results', function(req, res) {
   scoreViewed = true;
+  if(req.user){
+    db.User.findOne({_id: req.user._id}, function(err, foundUser) {
+      if(err){
+        return console.log("Error finding user")
+      }
+      var percent = (score/totalQuestions*100*100)/100;
+      foundUser.scores.push(percent);
+      foundUser.save();
+    })
+  }
   res.render('results', {user: req.user, score: score});
 })
 //Start the server

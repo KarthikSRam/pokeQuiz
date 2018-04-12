@@ -6,7 +6,8 @@ var UserSchema = new Schema({
   // email: String,
   username: String,
   password: String,
-  location: String
+  location: String,
+  scores: [Number]
 });
 
 UserSchema.plugin(passportLocalMongoose);
