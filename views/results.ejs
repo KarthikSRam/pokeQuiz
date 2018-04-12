@@ -7,8 +7,15 @@
     <%- include('./partials/nav', {user: user}); %>
     <div class="resultsDiv">
       <h2>Results</h2>
-      <h3><%= user.username%></h3>
-      <h3>Correct answers: <%= score %> out of 3</h3>
+      <% if(!user){ %>
+        <h3>Guest User</h3>
+      <% } else { %>
+        <h3><%= user.username%></h3>
+      <% } %>
+
+      <h3>You got <%= score %> out of 3 questions correct!</h3>
+      <% var percent = Math.round(score/3*100 * 100) / 100; %>
+      <h3>Percentage: <%= percent %>%</h3>
     </div>
   </body>
 </html>
