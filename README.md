@@ -11,4 +11,4 @@ pokeQuiz is a fun Pokemon quiz app that can be played by anyone.
 
 ## Deployed Link
 
-Coming soon
+[https://cryptic-depths-83377.herokuapp.com/](https://cryptic-depths-83377.herokuapp.com/)
