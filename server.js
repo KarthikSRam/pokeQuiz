@@ -132,12 +132,16 @@ app.get('/results', function(req, res) {
       if(err){
         return console.log("Error finding user")
       }
-      var percent = (score/totalQuestions*100*100)/100;
+      var percent = Math.round(score/totalQuestions*100*100)/100;
       foundUser.scores.push(percent);
       foundUser.save();
     })
   }
-  res.render('results', {user: req.user, score: score});
+  res.render('results', {user: req.user, score: score, totalQuestions: totalQuestions});
+})
+
+app.get('/profile', function(req, res) {
+  res.render('profile', {user: req.user})
 })
 //Start the server
 app.listen(process.env.PORT || 3000, function () {
