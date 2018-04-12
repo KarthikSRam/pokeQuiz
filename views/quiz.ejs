@@ -7,7 +7,7 @@
     <%- include('./partials/nav', {user: user}); %>
     <div class="questionDiv">
       <h3 class="questionText"><%= question.question  %></h3>
-      <img src="<%= question.image %>" alt="image missing">
+      <img class="questionImage" src="<%= question.image %>" alt="image missing">
     </div>
 
       <form id="optionsForm" action="#">

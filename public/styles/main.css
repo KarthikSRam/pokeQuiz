@@ -25,6 +25,13 @@
   text-align: center;
 }
 
+.questionImage{
+  max-width:400px;
+  max-height:300px;
+  width: auto;
+  height: auto;
+}
+
 .optionImage{
   /* display: block; */
   max-width:300px;
